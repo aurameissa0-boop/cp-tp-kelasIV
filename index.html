@@ -1,24 +1,19 @@
 <!doctype html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Capaian & Tujuan Pembelajaran</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    body { box-sizing: border-box; }
+    /* ===== RESET ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; }
+    body { font-family: 'Fredoka', sans-serif; overflow-x: hidden; }
 
-    html, body { height: 100%; width: 100%; }
-
-    body {
-      font-family: 'Fredoka', sans-serif;
-      overflow: auto;
-    }
-
-    /* ===== WARNA SESUAI GAMBAR GOOGLE SITES ===== */
+    /* ===== WARNA SESUAI GAMBAR ===== */
     :root{
       --green-soft:#AEE8A6;
       --green-soft-2:#9FDEA0;
@@ -28,265 +23,261 @@
       --white-soft:rgba(255,255,255,0.45);
     }
 
-    .app-wrapper {
+    /* ===== WRAPPER (AMAN UNTUK EMBED) ===== */
+    .app-wrapper{
       width: 100%;
-      min-height: 100%;
+      min-height: 100vh;
       background: linear-gradient(135deg, var(--green-soft) 0%, var(--brown-soft) 100%);
-      padding: 30px 15px;
+      padding: 18px 14px;            /* lebih compact */
       display: flex;
       flex-direction: column;
       align-items: center;
+      overflow: hidden;               /* cegah melebar di embed */
+      position: relative;             /* untuk floating absolute */
     }
 
-    .header {
-      text-align: center;
-      margin-bottom: 30px;
-      animation: fadeInDown 0.8s ease;
-      color: var(--text-main);
-    }
-
-    .emoji-hero {
-      font-size: 5rem;
-      margin-bottom: 20px;
-      animation: floatMascot 3s ease-in-out infinite;
-      filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15));
-    }
-
-    .header h1 {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-
-    .welcome-text {
-      font-size: 1.1rem;
-      margin-top: 15px;
-      font-weight: 500;
-      animation: pulse 2s ease-in-out infinite;
-    }
-
-    .decoration-line {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 15px;
-    }
-
-    .decoration-line span { font-size: 2rem; }
-
-    .star-decoration {
-      display: inline-block;
-      animation: twinkle 1.5s infinite;
-    }
-
-    @keyframes floatMascot {
-      0%, 100% { transform: translateY(0px) rotate(-5deg); }
-      50% { transform: translateY(-15px) rotate(5deg); }
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.7; }
-    }
-
-    @keyframes twinkle {
-      0%, 100% { transform: scale(1) rotate(0deg); }
-      50% { transform: scale(1.2) rotate(180deg); }
-    }
-
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-30px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes slideIn {
-      from { opacity: 0; transform: scale(0.8); }
-      to   { opacity: 1; transform: scale(1); }
-    }
-
-    .menu-container {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      width: 100%;
-      max-width: 500px;
-      animation: fadeInUp 0.8s ease 0.2s both;
-    }
-
-    .menu-card {
-      padding: 30px;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      position: relative;
-      overflow: hidden;
-      color: var(--text-main);
-    }
-
-    #cp-card {
-      background: linear-gradient(135deg, var(--green-soft-2), var(--green-soft));
-    }
-
-    #tp-card {
-      background: linear-gradient(135deg, var(--brown-soft), var(--brown-soft-2));
-    }
-
-    .menu-card::after {
-      content: '✨';
+    /* ===== FLOATING (UBAH: DARI FIXED → ABSOLUTE biar gak ngacauin embed) ===== */
+    .floating-elements{
       position: absolute;
-      bottom: 15px;
-      right: 15px;
-      font-size: 2rem;
-      opacity: 0.3;
-      animation: sparkle 2s ease-in-out infinite;
+      font-size: 1.6rem;
+      opacity: 0.25;
+      pointer-events: none;
+      animation: float 3.2s ease-in-out infinite;
+    }
+    @keyframes float{
+      0%, 100% { transform: translate(0,0) rotate(0deg); }
+      33% { transform: translate(14px,-14px) rotate(120deg); }
+      66% { transform: translate(-14px,14px) rotate(240deg); }
+    }
+    .floating-elements.fe-1{ top: 8%; left: 8%; animation-delay: 0s; }
+    .floating-elements.fe-2{ top: 14%; right: 10%; animation-delay: 1s; }
+    .floating-elements.fe-3{ bottom: 12%; left: 10%; animation-delay: 2s; }
+    .floating-elements.fe-4{ bottom: 18%; right: 8%; animation-delay: 1.5s; }
+
+    /* ===== HEADER ===== */
+    .header{
+      text-align: center;
+      color: var(--text-main);
+      width: 100%;
+      max-width: 560px;
+      animation: fadeInDown 0.8s ease;
+      margin-bottom: 14px;
     }
 
-    @keyframes sparkle {
-      0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.3; }
-      50% { transform: scale(1.3) rotate(180deg); opacity: 0.6; }
+    .emoji-hero{
+      font-size: 3.8rem;              /* lebih kecil agar pas HP */
+      margin-bottom: 8px;
+      animation: floatMascot 3s ease-in-out infinite;
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.12));
+    }
+    @keyframes floatMascot{
+      0%, 100% { transform: translateY(0px) rotate(-4deg); }
+      50% { transform: translateY(-10px) rotate(4deg); }
     }
 
-    .menu-card:hover {
-      transform: translateY(-5px) scale(1.02);
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-    }
-
-    .menu-card-inner {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .menu-icon {
-      font-size: 3.5rem;
-      animation: bounce 2s infinite;
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-
-    .menu-text h2 {
-      font-size: 1.8rem;
-      font-weight: 600;
+    .header h1{
+      font-size: clamp(1.25rem, 4.8vw, 1.8rem); /* responsif */
+      font-weight: 700;
+      line-height: 1.15;
       margin-bottom: 8px;
     }
 
-    .menu-text p { font-size: 1rem; opacity: 0.8; }
-
-    .detail-view {
-      display: none;
-      width: 100%;
-      max-width: 500px;
-      animation: slideIn 0.5s ease;
+    .decoration-line{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
+      margin-top: 6px;
+    }
+    .decoration-line span{ font-size: 1.45rem; }
+    .star-decoration{ display:inline-block; animation: twinkle 1.5s infinite; }
+    @keyframes twinkle{
+      0%,100% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.15) rotate(180deg); }
     }
 
-    .detail-view.active { display: block; }
+    .welcome-text{
+      font-size: clamp(0.95rem, 3.8vw, 1.05rem);
+      margin-top: 8px;
+      font-weight: 600;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse{
+      0%,100% { opacity: 1; }
+      50% { opacity: 0.75; }
+    }
 
-    .detail-card {
-      padding: 40px;
-      border-radius: 30px;
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-      margin-bottom: 25px;
+    @keyframes fadeInDown{
+      from { opacity: 0; transform: translateY(-22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp{
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideIn{
+      from { opacity: 0; transform: scale(0.92); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    /* ===== MENU ===== */
+    .menu-container{
+      width: 100%;
+      max-width: 560px;
+      display:flex;
+      flex-direction:column;
+      gap: 14px;                      /* lebih rapat */
+      animation: fadeInUp 0.8s ease 0.15s both;
+      padding-bottom: 8px;
+    }
+
+    .menu-card{
+      width: 100%;
+      padding: 16px 16px;             /* lebih compact */
+      border-radius: 22px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.10);
+      position: relative;
+      overflow: hidden;
+      color: var(--text-main);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    #cp-card{ background: linear-gradient(135deg, var(--green-soft-2), var(--green-soft)); }
+    #tp-card{ background: linear-gradient(135deg, var(--brown-soft), var(--brown-soft-2)); }
+
+    /* indikator “tap” di HP */
+    .menu-card:active{ transform: scale(0.99); }
+
+    .menu-card::after{
+      content: '✨';
+      position:absolute;
+      bottom: 10px;
+      right: 12px;
+      font-size: 1.6rem;
+      opacity: 0.28;
+      animation: sparkle 2s ease-in-out infinite;
+    }
+    @keyframes sparkle{
+      0%,100% { transform: scale(1) rotate(0deg); opacity: 0.28; }
+      50% { transform: scale(1.2) rotate(180deg); opacity: 0.55; }
+    }
+
+    .menu-card-inner{
+      display:flex;
+      align-items:center;
+      gap: 14px;
+    }
+
+    .menu-icon{ font-size: 2.6rem; animation: bounce 2s infinite; }
+    @keyframes bounce{
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-7px); }
+    }
+
+    .menu-text h2{
+      font-size: clamp(1.05rem, 4.2vw, 1.45rem);
+      font-weight: 700;
+      margin-bottom: 4px;
+      line-height: 1.1;
+    }
+    .menu-text p{
+      font-size: clamp(0.85rem, 3.4vw, 1rem);
+      opacity: 0.85;
+      line-height: 1.25;
+    }
+
+    /* ===== DETAIL ===== */
+    .detail-view{
+      display:none;
+      width: 100%;
+      max-width: 560px;
+      animation: slideIn 0.45s ease;
+      padding-bottom: 8px;
+    }
+    .detail-view.active{ display:block; }
+
+    .detail-card{
+      padding: 18px 16px;            /* lebih compact */
+      border-radius: 22px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+      margin-bottom: 14px;
       color: var(--text-main);
     }
 
-    #cp-detail-card {
-      background: linear-gradient(135deg, var(--green-soft-2), var(--green-soft));
+    #cp-detail-card{ background: linear-gradient(135deg, var(--green-soft-2), var(--green-soft)); }
+    #tp-detail-card{ background: linear-gradient(135deg, var(--brown-soft), var(--brown-soft-2)); }
+
+    .detail-header{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      padding-bottom: 10px;
+      border-bottom: 3px dashed rgba(255,255,255,0.55);
+    }
+    .detail-header .icon{ font-size: 2.6rem; }
+    .detail-header h2{
+      font-size: clamp(1.05rem, 4.2vw, 1.55rem);
+      font-weight: 800;
+      line-height: 1.1;
     }
 
-    #tp-detail-card {
-      background: linear-gradient(135deg, var(--brown-soft), var(--brown-soft-2));
-    }
-
-    .detail-header {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      margin-bottom: 30px;
-      padding-bottom: 20px;
-      border-bottom: 3px dashed rgba(255, 255, 255, 0.5);
-    }
-
-    .detail-header .icon { font-size: 4rem; }
-
-    .detail-header h2 {
-      font-size: 2.2rem;
-      font-weight: 700;
-    }
-
-    .detail-content {
-      font-size: 1.1rem;
-      line-height: 1.8;
-      padding: 20px;
-      border-radius: 20px;
+    .detail-content{
+      margin-top: 12px;
+      font-size: clamp(0.92rem, 3.6vw, 1.05rem);
+      line-height: 1.6;
+      padding: 14px;
+      border-radius: 18px;
       background: var(--white-soft);
       white-space: pre-line;
     }
 
-    .back-button {
-      display: inline-flex;
-      align-items: center;
+    /* ===== TOMBOL: NYAMAN DIKLIK HP ===== */
+    .back-button{
+      width: 100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
       gap: 10px;
-      padding: 18px 35px;
-      font-size: 1.1rem;
-      font-weight: 600;
+      padding: 14px 16px;
       border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-      font-family: 'Fredoka', sans-serif;
+      border-radius: 999px;
+      cursor:pointer;
+      font-size: 1.05rem;
+      font-weight: 800;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+      font-family:'Fredoka',sans-serif;
       color: var(--text-main);
+      -webkit-tap-highlight-color: transparent;
     }
+    .back-button:active{ transform: scale(0.99); }
 
-    .back-button.cp { background: var(--green-soft-2); }
-    .back-button.tp { background: var(--brown-soft-2); }
+    .back-button.cp{ background: var(--green-soft-2); }
+    .back-button.tp{ background: var(--brown-soft-2); } /* tombol TP coklat */
 
-    .back-button:hover {
-      transform: translateY(-3px);
-      opacity: 0.9;
+    /* ===== EXTRA: supaya embed Google Sites rapi ===== */
+    /* (kalau embed kecil, semuanya tetap full width & rapi) */
+    @media (max-width: 380px){
+      .emoji-hero{ font-size: 3.3rem; }
+      .menu-icon{ font-size: 2.35rem; }
+      .menu-card{ padding: 14px; border-radius: 20px; }
+      .detail-card{ padding: 16px 14px; border-radius: 20px; }
     }
-
-    .floating-elements {
-      position: fixed;
-      font-size: 2rem;
-      opacity: 0.3;
-      pointer-events: none;
-      animation: float 3s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translate(0, 0) rotate(0deg); }
-      33% { transform: translate(20px, -20px) rotate(120deg); }
-      66% { transform: translate(-20px, 20px) rotate(240deg); }
-    }
-
-    .floating-elements:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
-    .floating-elements:nth-child(2) { top: 20%; right: 15%; animation-delay: 1s; }
-    .floating-elements:nth-child(3) { bottom: 15%; left: 15%; animation-delay: 2s; }
-    .floating-elements:nth-child(4) { bottom: 25%; right: 10%; animation-delay: 1.5s; }
   </style>
 </head>
 
 <body>
-  <div class="floating-elements">✨</div>
-  <div class="floating-elements">🌟</div>
-  <div class="floating-elements">💫</div>
-  <div class="floating-elements">⭐</div>
-
+  <!-- Floating yang aman untuk embed -->
   <div class="app-wrapper">
+    <div class="floating-elements fe-1">✨</div>
+    <div class="floating-elements fe-2">🌟</div>
+    <div class="floating-elements fe-3">💫</div>
+    <div class="floating-elements fe-4">⭐</div>
+
     <div class="header">
       <div class="emoji-hero">✉️</div>
-      <h1>Capaian & Tujuan Pembelajaran</h1>
+      <h1 id="page-title">Capaian &amp; Tujuan Pembelajaran</h1>
       <div class="decoration-line">
         <span class="star-decoration">🌈</span>
         <span>📚</span>
@@ -300,7 +291,7 @@
         <div class="menu-card-inner">
           <div class="menu-icon">🎯</div>
           <div class="menu-text">
-            <h2>Capaian Pembelajaran</h2>
+            <h2 id="cp-title">Capaian Pembelajaran</h2>
             <p>Klik untuk melihat capaian pembelajaran</p>
           </div>
         </div>
@@ -310,7 +301,7 @@
         <div class="menu-card-inner">
           <div class="menu-icon">🚀</div>
           <div class="menu-text">
-            <h2>Tujuan Pembelajaran</h2>
+            <h2 id="tp-title">Tujuan Pembelajaran</h2>
             <p>Klik untuk melihat tujuan pembelajaran</p>
           </div>
         </div>
@@ -321,50 +312,82 @@
       <div class="detail-card" id="cp-detail-card">
         <div class="detail-header">
           <div class="icon">🎯</div>
-          <h2>Capaian Pembelajaran</h2>
+          <h2 id="cp-detail-title">Capaian Pembelajaran</h2>
         </div>
         <div class="detail-content" id="cp-content"></div>
       </div>
-      <button class="back-button cp" onclick="backToMenu()">⬅️ Kembali ke CP&TP</button>
+      <button class="back-button cp" onclick="backToMenu()">
+        <span>⬅️</span><span>Kembali ke CP&TP</span>
+      </button>
     </div>
 
     <div id="tp-detail" class="detail-view">
       <div class="detail-card" id="tp-detail-card">
         <div class="detail-header">
           <div class="icon">🚀</div>
-          <h2>Tujuan Pembelajaran</h2>
+          <h2 id="tp-detail-title">Tujuan Pembelajaran</h2>
         </div>
         <div class="detail-content" id="tp-content"></div>
       </div>
-      <button class="back-button tp" onclick="backToMenu()">⬅️ Kembali ke CP&TP</button>
+      <button class="back-button tp" onclick="backToMenu()">
+        <span>⬅️</span><span>Kembali ke CP&TP</span>
+      </button>
     </div>
+
   </div>
 
-<script>
-  const cpText =
-"Siswa mampu menulis teks narasi, teks deskripsi, teks rekon, teks prosedur, dan teks eksposisi dengan rangkaian kalimat yang beragam, informasi yang rinci, dan akurat dengan topik yang beragam.";
+  <script>
+    const defaultConfig = {
+      page_title: "Capaian & Tujuan Pembelajaran",
+      cp_title: "Capaian Pembelajaran",
+      cp_content: "Siswa mampu menulis teks narasi, teks deskripsi, teks rekon, teks prosedur, dan teks eksposisi dengan rangkaian kalimat yang beragam, informasi yang rinci, dan akurat dengan topik yang beragam.",
+      tp_title: "Tujuan Pembelajaran",
+      tp_content:
+        "Setelah pembelajaran, siswa dapat:\n" +
+        "1) Mengidentifikasi bagian-bagian surat pribadi (tanggal, alamat, salam pembuka, isi surat, salam penutup, dan tanda tangan),\n" +
+        "2) Menulis surat pribadi untuk teman atau keluarga dengan menggunakan bahasa yang santun dan komunikatif,\n" +
+        "3) Menggunakan ejaan dan tanda baca yang benar dalam menulis surat pribadi."
+    };
 
-  const tpText =
-"Setelah pembelajaran, siswa dapat:\n" +
-"1) Memahami pengertian, struktur, fungsi, tujuan, dan surat elektronik (email),\n" +
-"2) Menerapkan pengetahuan tentang bagian-bagian surat pribadi (tanggal, alamat, salam pembuka, isi, salam penutup, nama dan tanda pengirim),\n" +
-"3) Menulis surat pribadi secara runtut berdasarkan gagasan, pengalaman, perasaan dengan stimulus dari cerita rakyat.";
+    function showDetail(type) {
+      const menuView = document.getElementById('menu-view');
+      const cpDetail = document.getElementById('cp-detail');
+      const tpDetail = document.getElementById('tp-detail');
 
-  document.getElementById("cp-content").textContent = cpText;
-  document.getElementById("tp-content").textContent = tpText;
+      menuView.style.display = 'none';
 
-  function showDetail(type) {
-    document.getElementById("menu-view").style.display = "none";
-    document.getElementById("cp-detail").classList.remove("active");
-    document.getElementById("tp-detail").classList.remove("active");
-    document.getElementById(type + "-detail").classList.add("active");
-  }
+      if (type === 'cp') {
+        cpDetail.classList.add('active');
+        tpDetail.classList.remove('active');
+      } else {
+        tpDetail.classList.add('active');
+        cpDetail.classList.remove('active');
+      }
+    }
 
-  function backToMenu() {
-    document.getElementById("menu-view").style.display = "flex";
-    document.getElementById("cp-detail").classList.remove("active");
-    document.getElementById("tp-detail").classList.remove("active");
-  }
-</script>
+    function backToMenu() {
+      const menuView = document.getElementById('menu-view');
+      const cpDetail = document.getElementById('cp-detail');
+      const tpDetail = document.getElementById('tp-detail');
+
+      cpDetail.classList.remove('active');
+      tpDetail.classList.remove('active');
+      menuView.style.display = 'flex';
+    }
+
+    function applyContent(cfg) {
+      document.getElementById('page-title').textContent = cfg.page_title || defaultConfig.page_title;
+
+      document.getElementById('cp-title').textContent = cfg.cp_title || defaultConfig.cp_title;
+      document.getElementById('cp-detail-title').textContent = cfg.cp_title || defaultConfig.cp_title;
+      document.getElementById('cp-content').textContent = cfg.cp_content || defaultConfig.cp_content;
+
+      document.getElementById('tp-title').textContent = cfg.tp_title || defaultConfig.tp_title;
+      document.getElementById('tp-detail-title').textContent = cfg.tp_title || defaultConfig.tp_title;
+      document.getElementById('tp-content').textContent = cfg.tp_content || defaultConfig.tp_content;
+    }
+
+    applyContent(defaultConfig);
+  </script>
 </body>
 </html>
